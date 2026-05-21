@@ -1,0 +1,46 @@
+From 6fdce9fba15633a0b7e0ae461953a99af745e5dd Mon Sep 17 00:00:00 2001
+From: admin <admin@sahasrara.guruswami.internal>
+Date: Thu, 21 May 2026 12:35:23 +1000
+Subject: [PATCH] deepseek_v2: opt-in MoEGate._resident_mask (WCER score-layer
+ residency)
+
+Same hook as deepseek_v4: a [n_routed_experts] bool mask (None=stock) pushes
+non-resident softmax scores below 0 before argpartition, restricting routing to
+the resident set; selected scores untouched. No hash layers in V2, so all MoE
+layers are maskable. Lets the WCER resident loader run DeepSeek-V2-Lite (family
+continuity toward V4-Pro; has shared experts, no hash).
+
+Co-Authored-By: Claude Opus 4.7 (1M context) <noreply@anthropic.com>
+---
+ mlx_lm/models/deepseek_v2.py | 8 ++++++++
+ 1 file changed, 8 insertions(+)
+
+diff --git a/mlx_lm/models/deepseek_v2.py b/mlx_lm/models/deepseek_v2.py
+index a263d85..612b57f 100644
+--- a/mlx_lm/models/deepseek_v2.py
++++ b/mlx_lm/models/deepseek_v2.py
+@@ -276,6 +276,9 @@ class MoEGate(nn.Module):
+         self.n_group = config.n_group
+         self.topk_group = config.topk_group
+         self.weight = mx.zeros((self.n_routed_experts, config.hidden_size))
++        # Track-B (WCER) opt-in: [n_routed_experts] bool resident mask, or None
++        # (stock). Set by the resident-set loader to restrict routing.
++        self._resident_mask = None
+ 
+     def __call__(self, x):
+         gates = x @ self.weight.T
+@@ -293,6 +296,11 @@ class MoEGate(nn.Module):
+             )
+             scores = scores.reshape(bsz, seq_len, -1)
+ 
++        if self._resident_mask is not None:
++            # Softmax scores are in (0,1); pushing non-resident below 0 keeps them
++            # out of the top-k while leaving resident scores untouched.
++            scores = mx.where(self._resident_mask, scores, mx.array(-1.0, scores.dtype))
++
+         k = self.top_k
+         inds = mx.argpartition(-scores, kth=k - 1, axis=-1)[..., :k]
+         scores = mx.take_along_axis(scores, inds, axis=-1)
+-- 
+2.54.0
+

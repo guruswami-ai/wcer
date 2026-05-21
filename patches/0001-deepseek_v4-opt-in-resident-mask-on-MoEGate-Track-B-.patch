@@ -1,0 +1,47 @@
+From b65e1d36a0ea276007884195ee6fde65ab954fc7 Mon Sep 17 00:00:00 2001
+From: admin <admin@sahasrara.guruswami.internal>
+Date: Thu, 21 May 2026 05:45:04 +1000
+Subject: [PATCH] deepseek_v4: opt-in resident-mask on MoEGate (Track B
+ score-layer residency)
+
+Adds MoEGate._resident_mask (None by default = stock). When set to a [n_routed]
+bool mask, score-routed layers mask non-resident experts' biased scores to -inf
+before argpartition, so the router selects only within the resident set; weights
+still come from the unmasked scores at the chosen experts. Hash-routed layers are
+untouched (fixed table routing). Consumed by the resident-set loader to prune
+score layers while keeping hash layers as a fixed broad union.
+
+Co-Authored-By: Claude Opus 4.7 (1M context) <noreply@anthropic.com>
+---
+ mlx_lm/models/deepseek_v4.py | 8 ++++++++
+ 1 file changed, 8 insertions(+)
+
+diff --git a/mlx_lm/models/deepseek_v4.py b/mlx_lm/models/deepseek_v4.py
+index 709b598..d2ca00a 100644
+--- a/mlx_lm/models/deepseek_v4.py
++++ b/mlx_lm/models/deepseek_v4.py
+@@ -346,6 +346,10 @@ class MoEGate(nn.Module):
+         self.weight = mx.zeros((self.n_routed, args.hidden_size))
+         # Cache transposed weight to avoid recomputing .T every forward call.
+         self._weight_t = None
++        # Track-B opt-in: a [n_routed] bool mask restricting routing to a resident
++        # expert set (score-routed layers only; hash layers route by fixed table).
++        # None = unmasked (stock). Set by the resident-set loader.
++        self._resident_mask = None
+         if self.hash:
+             # tid2eid: [vocab, top_k] int32 — predetermined expert routing per token id
+             self.tid2eid = mx.zeros((args.vocab_size, self.top_k), dtype=mx.int32)
+@@ -377,6 +381,10 @@ class MoEGate(nn.Module):
+             scores = _score_func(scores, self.score_func)
+             orig = scores
+             biased = scores + self.e_score_correction_bias
++            if self._resident_mask is not None:
++                # Restrict selection to the resident set; weights still come from
++                # the unmasked `orig` scores at the (resident) chosen experts.
++                biased = mx.where(self._resident_mask, biased, mx.array(-1e9, dtype=biased.dtype))
+             inds = mx.argpartition(-biased, kth=self.top_k - 1, axis=-1)[..., : self.top_k]
+             weights = mx.take_along_axis(orig, inds, axis=-1)
+ 
+-- 
+2.54.0
+

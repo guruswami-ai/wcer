@@ -1,0 +1,7 @@
+__pycache__/
+*.pyc
+*.npy
+bank.json
+/tmp-*
+*.tmp
+.DS_Store

@@ -1,0 +1,5 @@
+# WCER runtime deps. Run scripts with a patched mlx-lm on PYTHONPATH (see README).
+mlx>=0.20
+mlx-lm>=0.20
+numpy>=1.26
+# optional, for local data charts (figures/): matplotlib>=3.8
