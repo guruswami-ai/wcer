@@ -11,6 +11,16 @@ Validated on **5 MoE models from 4 families** (Mixtral, OLMoE, Qwen3, DeepSeek-V
 
 > **mechanism** = the scripts · **proof** = `traces/` + `RESULTS.md` · **interpretation** = `WCER_DRAFT.md` · **upstream changes** = `patches/`
 
+## Visual summary
+
+![Concentration predicts savings](figures/concentration-vs-savings.png)
+
+![Where WCER is useful](figures/wcer-use-cases.png)
+
+![FORGE](figures/forge-flowchart.png)
+
+*The concept comparison figure is intentionally omitted here until the corrected version is regenerated.*
+
 ---
 
 ## Layout
