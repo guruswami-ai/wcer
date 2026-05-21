@@ -1,5 +1,7 @@
 # WCER — Workload-Conditioned Expert Residency
 
+![WCER banner](figures/wcer-banner.png)
+
 **Run a Mixture-of-Experts (MoE) model using only the experts your workload actually uses — saving memory and start-up latency without changing the model's answers.**
 
 WCER traces which experts a real workload activates, keeps only those resident in memory (the rest stay cold), restricts routing to that set, and verifies the slimmed model is **behavior-identical** to the full model under the same routing mask. How much it helps is set by how *concentrated* the model's routing is — which you can measure from a quick trace **before** deploying.
@@ -18,8 +20,6 @@ Validated on **5 MoE models from 4 families** (Mixtral, OLMoE, Qwen3, DeepSeek-V
 ![Where WCER is useful](figures/wcer-use-cases.png)
 
 ![FORGE](figures/forge-flowchart.png)
-
-*The concept comparison figure is intentionally omitted here until the corrected version is regenerated.*
 
 ---
 
