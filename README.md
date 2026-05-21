@@ -37,7 +37,7 @@ wcer/
   wcer_search.py             # hardware-fit search: budget × selection → Pareto
   traces/            # expert-trace/1 JSON artifacts (5 models × 3 workloads)
   patches/           # PR-ready mlx-lm patches (DeepSeek MoEGate hooks)
-  figures/           # infographic specs (SPECS.md) + generated figures
+  figures/           # rendered figures + chart render script
 ```
 
 ## Install
