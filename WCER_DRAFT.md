@@ -23,10 +23,10 @@
 ![Concentration predicts savings](figures/concentration-vs-savings.png)
 *One trace predicts the payoff before you deploy.*
 
-![Where WCER is useful](figures/wcer-use-cases.png)
+![Where WCER is useful](figures/wcer-use-cases.jpg)
 *Per-workload servers, bigger MoEs on smaller machines, and less over-quantization.*
 
-![FORGE](figures/forge-flowchart.png)
+![FORGE](figures/forge-flowchart.jpg)
 *Trace-driven residency is the foundation for a broader residency × quantization search.*
 
 **Why it matters**
