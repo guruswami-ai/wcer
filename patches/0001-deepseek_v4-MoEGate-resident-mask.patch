@@ -1,7 +1,7 @@
 From b65e1d36a0ea276007884195ee6fde65ab954fc7 Mon Sep 17 00:00:00 2001
-From: admin <admin@sahasrara.guruswami.internal>
+From: Guruswami <info@guruswami.com>
 Date: Thu, 21 May 2026 05:45:04 +1000
-Subject: [PATCH] deepseek_v4: opt-in resident-mask on MoEGate (Track B
+Subject: [PATCH] deepseek_v4: opt-in resident-mask on MoEGate (runtime
  score-layer residency)
 
 Adds MoEGate._resident_mask (None by default = stock). When set to a [n_routed]

@@ -1,5 +1,5 @@
 From 6fdce9fba15633a0b7e0ae461953a99af745e5dd Mon Sep 17 00:00:00 2001
-From: admin <admin@sahasrara.guruswami.internal>
+From: Guruswami <info@guruswami.com>
 Date: Thu, 21 May 2026 12:35:23 +1000
 Subject: [PATCH] deepseek_v2: opt-in MoEGate._resident_mask (WCER score-layer
  residency)
