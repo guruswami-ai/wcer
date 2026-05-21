@@ -47,9 +47,9 @@ def parse_results(md: str) -> list[dict[str, float | str]]:
             {
                 "model": model,
                 "family": family,
-                "imbalance": float(re.sub(r"[~×x ]", "", imbalance)),
-                "cov90": float(re.sub(r"[^0-9.]", "", cov90)),
-                "ram_cut": float(re.sub(r"[^0-9.]", "", ram_cut)),
+                "imbalance": float(re.findall(r"[\d.]+", imbalance)[0]),
+                "cov90": float(re.findall(r"[\d.]+", cov90)[0]),
+                "ram_cut": float(re.findall(r"[\d.]+", ram_cut)[0]),
             }
         )
     if not rows:
