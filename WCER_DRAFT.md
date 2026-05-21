@@ -18,6 +18,17 @@
 - Found a clear pattern: on **balanced** MoEs the gain is small (~14%); on **concentrated** MoEs it's large (up to ~68% memory cut, no quality loss).
 - Confirmed the tradeoff is real: it saves **memory** and improves **warm load time + time-to-first-word**, but does **not** improve cold-from-disk load (current loader) and is usually a **memory/throughput tradeoff**, not a free win.
 
+## Visual summary
+
+![Concentration predicts savings](figures/concentration-vs-savings.png)
+*One trace predicts the payoff before you deploy.*
+
+![Where WCER is useful](figures/wcer-use-cases.png)
+*Per-workload servers, bigger MoEs on smaller machines, and less over-quantization.*
+
+![FORGE](figures/forge-flowchart.png)
+*Trace-driven residency is the foundation for a broader residency × quantization search.*
+
 **Why it matters**
 - A model can sometimes fit on a machine that would otherwise be too small.
 - You can run a larger or higher-precision MoE without forcing aggressive quantization.

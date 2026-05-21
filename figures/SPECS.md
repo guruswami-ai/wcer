@@ -6,9 +6,21 @@ Four infographics explain the paper visually. Generated with a text-to-image mod
 indigo + amber accents, green to mark savings, no neon/cyberpunk, legible labels.**
 Drop the rendered PNG/JPG next to this file and reference it from `WCER_DRAFT.md`.
 
-> Status: pending an available image backend. The two data-driven figures (2 and the
-> Pareto) are ideally rendered as real charts (matplotlib) from the numbers below;
-> figures 1, 3, 4 are illustrative.
+> Status: rendered assets are now present in this repo. The two data-driven figures
+> (2 and the Pareto) are rendered as real charts (matplotlib) from the numbers
+> below; figures 1, 3, 4 are illustrative.
+
+Rendered assets in this repo:
+
+- `wcer-use-cases.png`
+- `forge-flowchart.png`
+- `concentration-vs-savings.png`
+- `concentration-vs-savings.svg`
+
+> Figure 1 (`wcer-concept.png`) is **not yet included**: the draft render's summary
+> strip claimed "higher throughput", which contradicts the measured result (residency
+> is throughput-neutral — see `WCER_DRAFT.md` §findings). To be regenerated with
+> corrected text before inclusion.
 
 ---
 
@@ -24,6 +36,8 @@ Drop the rendered PNG/JPG next to this file and reference it from `WCER_DRAFT.md
 > (on disk)", with a router arrow routing tokens only to the highlighted experts,
 > caption "only the workload's experts resident → less memory, identical answers".
 > Bottom strip: "Keep only the experts your workload actually uses."
+
+Output: `wcer-concept.png`
 
 ## Figure 2 — Concentration predicts savings (data chart)
 
@@ -41,6 +55,8 @@ Drop the rendered PNG/JPG next to this file and reference it from `WCER_DRAFT.md
 
 Caption: "The more concentrated a model's routing (fewer experts cover its work), the more WCER saves — and you can measure this before you deploy."
 
+Output: `concentration-vs-savings.png` and `concentration-vs-savings.svg`
+
 ## Figure 3 — Use cases (ecosystem / mindmap)
 
 **Purpose:** where it's useful, simply.
@@ -53,6 +69,8 @@ Caption: "The more concentrated a model's routing (fewer experts cover its work)
 > precision, don't over-quantize" — a dial showing '8-bit, fewer experts' vs
 > '4-bit, all experts'; (4) "Predict before you spend" — a magnifying glass over a
 > trace with a green check / red cross. Clean iconographic infographic.
+
+Output: `wcer-use-cases.png`
 
 ## Figure 4 — FORGE: the research direction (flowchart)
 
@@ -68,3 +86,5 @@ Caption: "The more concentrated a model's routing (fewer experts cover its work)
 > "Trace-driven fine-tuning". A side note: "conditioned on a specific machine and a
 > specific workload." Mark Stage 2 (WCER) as done/validated and Stages 3–4 as
 > research direction.
+
+Output: `forge-flowchart.png`
