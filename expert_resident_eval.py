@@ -5,9 +5,9 @@ Measures the QUALITY cost of a resident set by router-masking the full model
 to it (so non-resident experts are never selected) and comparing perplexity in-
 and out-of-domain. Memory is reported analytically here; Stage 5
 (expert_resident_load.py) does the real unload + RAM/load/TTFT measurement.
-(See docs/EXPERT_RESIDENCY_AND_PRUNING.md.)
+(See README.md.)
 
-Resident-set quality/memory evaluation — Track B step 3 (close the loop).
+Resident-set quality/memory evaluation — WCER stage (close the loop).
 
 Builds a static resident set from an expert-trace (the hottest experts per
 layer), restricts the model's router to it (router-masking: non-resident expert

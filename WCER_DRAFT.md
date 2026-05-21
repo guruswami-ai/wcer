@@ -2,7 +2,7 @@
 
 ### Run only the experts your workload actually uses
 
-**Status:** Draft for discussion / paper. Tested on 5 Mixture-of-Experts models from 4 families on Apple Silicon (MLX). Full technical detail: `EXPERT_RESIDENCY_AND_PRUNING.md`.
+**Status:** Draft for discussion / paper. Tested on 5 Mixture-of-Experts models from 4 families on Apple Silicon (MLX). Numbers and exact commands: `RESULTS.md`.
 
 ---
 

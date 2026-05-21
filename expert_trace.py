@@ -1,17 +1,17 @@
 #!/usr/bin/env python3
 """WCER (Workload-Conditioned Expert Residency) — Stage 1: activation tracer.
 
-Pipeline (see docs/EXPERT_RESIDENCY_AND_PRUNING.md):
+Pipeline (see README.md):
   1. expert_trace.py            — trace which experts each token selects (this file)
   2. expert_trace_compare.py    — is routing workload-conditioned? (cross-workload)
   3. expert_resident_manifest.py— derive the per-layer resident set (a "bank")
   4. expert_resident_eval.py    — router-masked quality eval (full weights, no unload)
   5. expert_resident_load.py    — load ONLY the resident set; measure RAM/load/TTFT
 
-Expert activation tracer for MoE models — Track B decision-layer foundation.
+Expert activation tracer for MoE models — WCER decision-layer foundation.
 
 The plan's "first useful artifact is an activation-trace format, not a pruning
-algorithm" (EXPERT_PARALLELISM_PLAN.md, Track B). This records *which experts
+algorithm". This records *which experts
 each token selects*, per layer, during normal single-node inference, and emits a
 versioned, JSON-shareable summary that resident-set / placement decisions
 consume. Requires standard (non-expert-parallel) loading so expert ids are global (the stock

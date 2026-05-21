@@ -3,7 +3,7 @@
 
 Tests the "Workload-Conditioned" premise of WCER: does residency need to be
 workload-specific, or does one shared resident set serve everything? (See
-docs/EXPERT_RESIDENCY_AND_PRUNING.md.)
+README.md.)
 
 Cross-workload expert-usage comparison — does residency need to be workload-specific?
 

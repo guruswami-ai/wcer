@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """WCER Stage 3 — build a resident-set manifest ("bank") from an expert-trace.
 
-(See docs/EXPERT_RESIDENCY_AND_PRUNING.md.)
+(See README.md.)
 
 Turns a trace's per-layer histogram into an explicit, versioned manifest: the
 set of GLOBAL expert ids to keep resident per layer (the hottest `budget`).

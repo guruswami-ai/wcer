@@ -5,7 +5,7 @@ The "front end for hardware-conditioned model fitting": sweep resident budget
 (and, via multiple --model precisions, quantization level) × selection criterion,
 measure RAM / quality / TTFT per grid point in ISOLATED processes (clean peak
 memory), and emit a Pareto table — the best quality/memory tradeoff for a machine
-and workload. (See docs/EXPERT_RESIDENCY_AND_PRUNING.md.)
+and workload. (See README.md.)
 
 Each grid point shells out to the Stage-3 manifest builder + Stage-5 loader (each
 writes a metrics JSON) so peak RAM is process-isolated. The quant axis is just

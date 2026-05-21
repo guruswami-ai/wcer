@@ -4,9 +4,9 @@
 The core of Workload-Conditioned Expert Residency: load ONLY the experts a
 workload needs (per the Stage-3 manifest), keeping cold experts off-device, and
 measure the real RAM / load / TTFT win — validated behavior-preserving against
-the full model under the same router mask. (See docs/EXPERT_RESIDENCY_AND_PRUNING.md.)
+the full model under the same router mask. (See README.md.)
 
-Resident-set loader/unloader + measurement — Track B step 2 (the real feature).
+Resident-set loader/unloader + measurement — WCER stage (the real feature).
 
 Manifest-driven: loads a model with ONLY the resident experts materialized
 (lazy load -> fancy-index each switch_mlp's expert arrays to the manifest's
