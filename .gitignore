@@ -5,3 +5,10 @@ bank.json
 /tmp-*
 *.tmp
 .DS_Store
+
+# Secrets: never commit these
+.env
+.env.*
+!.env.example
+*.pem
+*.key
